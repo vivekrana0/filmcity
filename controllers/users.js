@@ -1,4 +1,4 @@
-const Student = require('../models/user');
+const User = require('../models/user');
 
 const request = require("request");
 
@@ -8,10 +8,11 @@ const rootURL = 'https://api.themoviedb.org/3/'
 
 const posterURL = 'https://image.tmdb.org/t/p/w300'
 
-const Url = 'discover/movie/?certification_country=US&certification=R&sort_by=vote_average.desc&'
+const Url = 'discover/movie?sort_by=popularity.desc&'
 
 module.exports = {
     index,
+    show
 }
 
 
@@ -47,6 +48,9 @@ function index(req, res, next){
       
 }
 
+function show(req, res){
+    console.log("whatssssssssssssssssssssss")
+}
 
 
 //base url + /search/movie? + apikey + '&query=' + searchterm

@@ -3,26 +3,34 @@
 <head>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script defer type="text/javascript" src="/javascripts/script.js"></script>
     
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
   <title>Document</title>
 </head>
 <body>
   <header>
     <h1>Film-City</h1>
     <nav>
-      <ul  class="nav-links">
-        <li><a href="#">Watchlist</a></li>
+      <ul class="nav-links">
+        <% if(user){%>
+          <li><a class ="header_links" href="/movies/<%= user.id %>/watchlist ">Watchlist</a></li>
+       <% }else{ %>
+        <li><a class ="header_links" href="/auth/google">Watchlist</a></li>
+       <% } %> 
+        
         <% if (user) { %>
-          <a href="/logout">Log Out</a>
+          <a class="header_links" href="/logout">Log Out</a>
         <% } else { %>
-          <a href="/auth/google">Login with Google</a>
+          <a class="header_links" href="/auth/google">Login with Google</a>
         <% } %>
     </ul>
     </nav>
   </header>
+ 
   <div>
       <img class="image"  src="images/jason-dent-SnXIF8_2oPw-unsplash.jpg" alt="">
   </div>
@@ -33,26 +41,22 @@
     </span>
   </form>
 
-<% if(movies){ %> 
-
-  <main id="movie">
-    <% movies.forEach(function(movie){ %>
-    <% const posterImg = posterURL + movie.poster_path %> 
-    <div class="film">
-      <img class="movieImg" src= "<%= posterImg %>" alt="">
-  
-      <div class="movie-title">
-        <h3><%= movie.title %> </h3>
+  <main>
+      <% movies.forEach(function(movie){ %>
+      <% const posterImg = posterURL + movie.poster_path %> 
+      <% const movieId = movie.id %> 
+      <div class="movie">
+        <img  src="<%= posterImg %>" data-movie-id="<%=movieId%> " alt="">
+        <div class="movie-title">
+          <h3><%= movie.title  %> </h3>
+          <span><%= movie.vote_average %> </span>
+        </div>
       </div>
-    </div>
-    <% }) %> 
+    <% }) %>
+
+    
   </main>
-<% }else{%>
-
-<% } %> 
-
   
-  <!-- <img src="/images/MAC_carina_Nebula.jpg" alt=""> -->
 </body>
 </html>
 

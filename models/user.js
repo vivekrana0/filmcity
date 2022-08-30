@@ -1,8 +1,13 @@
 var mongoose = require('mongoose');
 
 var watchlistSchema = new mongoose.Schema({
-    title: String,
-    rating: Number
+    original_title: String,
+    vote_average: Number,
+    poster_path: String,
+    overview: String,
+    homepage: String,
+    tagline: String,
+    id: Number
   }, {
     timestamps: true
   });

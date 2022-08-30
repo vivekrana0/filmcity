@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script defer type="text/javascript" src="/javascripts/script.js"></script>
+    
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Document</title>
+</head>
+<body>
+  <header>
+    <h1>Film-City</h1>
+    <nav>
+      <ul  class="nav-links">
+        <% if(user){%>
+          <li><a class ="header_links" href="/movies/<%= user.id %>/watchlist ">Watchlist</a></li>
+       <% }else{ %>
+        <li><a class ="header_links" href="/auth/google">Watchlist</a></li>
+       <% } %> 
+        <% if (user) { %>
+          <a class ="header_links" href="/logout">Log Out</a>
+        <% } else { %>
+          <a class ="header_links" href="/auth/google">Login with Google</a>
+        <% } %>
+    </ul>
+    </nav>
+  </header>
+<div class="main">
+  <div class="single_column">
+    <section id="original_header">
+      <div class="poster_wrapper">
+        <img  src="<%= posterPath %>" data-movie-id="<%=movieId%> " alt="">
+      </div>
+      <div class="content">
+        <div class="title"><h2><%= movieTitle %> </h2></div>
+        <div>
+          <% if(user){ %>
+            <a class="add"  href="/movies/<%=movieId%>/movie " data-movie-id= <%=movieId %>><strong>Add to Watchlist</strong></a>
+         <% }else{ %>
+          <a class="add"  href="/auth/google" data-movie-id= <%=movieId %>><strong>Add to Watchlist</strong></a>
+        <% }%> 
+          
+          <a id="trailer" class="add" href="#"><strong>Play Trailer</strong></a>
+          <a id="homepage" class="add" href="<%= homepage %> "><strong>Watch it Here</strong></a>
+        </div>
+        <div class="header_info">
+          <h3 id="tagline"><em><%=tagline %></em></h3>
+          <h3 class="overview_head">Overview</h3>
+          <div class="overview">
+            <p><%=movieOverview %></p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>  
+
+
+</body>
+</html>
