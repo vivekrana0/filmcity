@@ -40,8 +40,7 @@ function index(req, res, next){
         res.render('index', {movies: movieData.results, user: req.user, posterURL});
         console.log(movieData.results)
         }else{
-            res.render('index',{user: req.user})
-            console.log("nothing")
+            res.render('index', {movies: movieData.results, user: req.user, posterURL});
         }
         })
     }

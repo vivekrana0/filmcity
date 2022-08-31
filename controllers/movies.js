@@ -13,7 +13,8 @@ const Url = 'discover/movie?sort_by=popularity.desc&'
 module.exports = {
     show,
     add,
-    watchlist
+    watchlist,
+    delete: deleteMovie
 }
 
 function show(req, res){
@@ -29,8 +30,15 @@ function show(req, res){
         const movieOverview = movieData.overview
         const homepage = movieData.homepage
         const tagline = movieData.tagline
-        console.log(homepage)
-        res.render("movies", {posterPath, rating, movieTitle, movieId, user: req.user, movieOverview, homepage, tagline})
+        let there = false
+        if(req.user){
+            User.findById(req.user.id, function(err, user){
+                there = user.watchlist.find(ele => ele.id === movieId)
+                res.render("movies", {posterPath, rating, movieTitle, movieId, user: req.user, movieOverview, homepage, tagline, there})
+            })
+        }else{
+            res.render("movies", {posterPath, rating, movieTitle, movieId, user: req.user, movieOverview, homepage, tagline})
+        }
     })
 }
 
@@ -55,6 +63,20 @@ function add(req, res){
 function watchlist(req, res){
     User.findById(req.params.id, function(err, user){
         const movies = user.watchlist;
-        res.render("watchlist", {movies, user, posterURL})
+        res.render("watchlist", {movies, user:req.user, posterURL})
     })
 }
+
+function deleteMovie(req, res){
+    User.findById(req.user.id, function(err, user){
+       const index = user.watchlist.findIndex(function(movie){
+            return movie.id == req.params.id
+        })
+        user.watchlist.splice(index, 1)
+        user.save(function(err){
+        res.redirect(`/movies/${user.id}/watchlist`)
+        })
+        
+    })
+}
+

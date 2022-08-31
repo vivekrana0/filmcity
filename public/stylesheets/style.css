@@ -20,8 +20,9 @@ header{
   padding: 30px 40px;
 }
 
-h1{
+#logo, #delete_link{
   color: white;
+  text-decoration: none;
 }
 
 .nav-links{
@@ -45,6 +46,7 @@ border: 2px solid rgb(255, 255, 255);
 padding: 0.5rem 1rem;
 border-radius: 50px;
 background-color: var(--primary-color);
+margin-top: 0.7rem;
 }
 
 .search::placeholder{
@@ -152,4 +154,12 @@ form{
 }
 #trailer, #homepage{
   margin-left: 1rem;
+}
+#watchlist_heading{
+  color: white;
+  margin: 2rem 4rem;
+}
+#delete{
+  display: flex;
+  justify-content: center;
 }

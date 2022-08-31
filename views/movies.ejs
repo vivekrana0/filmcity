@@ -13,7 +13,7 @@
 </head>
 <body>
   <header>
-    <h1>Film-City</h1>
+    <a id="logo" href="/"><h1>Film-City</h1></a>
     <nav>
       <ul  class="nav-links">
         <% if(user){%>
@@ -39,7 +39,12 @@
         <div class="title"><h2><%= movieTitle %> </h2></div>
         <div>
           <% if(user){ %>
-            <a class="add"  href="/movies/<%=movieId%>/movie " data-movie-id= <%=movieId %>><strong>Add to Watchlist</strong></a>
+              <% if(there){ %>
+                <a class="add"  href="/movies/<%=movieId%>/movie " data-movie-id= <%=movieId %>><strong>Remove from Watchlist</strong></a>
+               <% } else{%>
+                  <a class="add"  href="/movies/<%=movieId%>/movie " data-movie-id= <%=movieId %>><strong>Add to Watchlist</strong></a>
+            <% } %> 
+            
          <% }else{ %>
           <a class="add"  href="/auth/google" data-movie-id= <%=movieId %>><strong>Add to Watchlist</strong></a>
         <% }%> 
