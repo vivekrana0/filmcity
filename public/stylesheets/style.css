@@ -73,6 +73,10 @@ main{
   box-shadow: 0 4px 5px rgba(0,0,0,0.5);
   margin: 1rem;
   border-radius: 2px;
+  cursor: pointer;
+}
+.movie:hover{
+  box-shadow: 0 0 10px #ccc;
 }
 
 .movie img{
@@ -139,8 +143,15 @@ form{
 
 .add{
   text-decoration: none;
+  box-shadow: inset 0 0 0 0 #54b3d6;
+  color: #54b3d6;
+  margin: 0 -.25rem;
+  padding: 0 .25rem;
+}
+a:hover {
   color: white;
 }
+
 .overview{
   width: 70%;
   
@@ -162,6 +173,9 @@ form{
 #delete{
   display: flex;
   justify-content: center;
+}
+#delete_link{
+  color: #54b3d6;
 }
 .trailer_container{
   position: fixed;
@@ -198,4 +212,7 @@ form{
 iframe{
   width: 100%;
   height: 100%;
+}
+#delete_link:hover{
+  color:white;
 }

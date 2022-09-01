@@ -31,20 +31,28 @@ function show(req, res){
         const movieOverview = movieData.overview
         const homepage = movieData.homepage
         const tagline = movieData.tagline
-        let there = false
+        
         if(req.user){
             User.findById(req.user.id, function(err, user){
-                there = user.watchlist.find(ele => ele.id === movieId)
-                res.render("movies", {posterPath, rating, movieTitle, movieId, user: req.user, movieOverview, homepage, tagline, there})
+                let isOne = user.watchlist.some(function(e){
+                    console.log(e.id)
+                    console.log(movieId)
+                    return e.id == movieId
+                    
+                })
+                res.render("movies", {posterPath, rating, movieTitle, movieId, user: req.user, movieOverview, homepage, tagline, isOne})
             })
+
         }else{
-            res.render("movies", {posterPath, rating, movieTitle, movieId, user: req.user, movieOverview, homepage, tagline})
+            res.redirect("/auth/google")
         }
+    
+        
     })
 }
 
 function add(req, res){
-    const movieId = req.params.id
+    const movieId = req.params.id 
     User.findById(req.user.id, function(err, user){
 
     const options = {
@@ -54,10 +62,11 @@ function add(req, res){
         const movieData = JSON.parse(body)
         user.watchlist.push(movieData)
         user.save(function(err){
+            if(err) res.redirect("/")
             res.redirect(`/movies/${movieId}`)
         })
         })
-    
+           
 })   
 }
 
@@ -84,17 +93,17 @@ function deleteMovie(req, res){
 function trailer(req, res){
     movieId = req.params.id
     const options = {
-        url: `${rootURL}movie/${movieId}/videos?api_key=${key}` 
+        url: `${rootURL}movie/${movieId}/videos?api_key=${key}` ,
     }
+    console.log(options)
     request(options, function(err, response, body){
         const movieData = JSON.parse(body)
+        console.log(body)
         const movieArray = movieData.results
         const movieObj = movieArray.find(function(e){
             return e.type === "Trailer"
         })
         const videoKey = movieObj.key
-        console.log(videoKey)
-
         res.render("trailer", {videoKey, user: req.user, movieId})
         })
 }

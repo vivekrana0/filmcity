@@ -35,7 +35,6 @@ function index(req, res, next){
     }
     request(options, function(err, response, body){
         const movieData = JSON.parse(body)
-        // console.log(posterURL + movieData.poster_path)
         if(movieData.results.length){
         res.render('index', {movies: movieData.results, user: req.user, posterURL});
         }else{
