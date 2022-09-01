@@ -38,7 +38,6 @@ function index(req, res, next){
         // console.log(posterURL + movieData.poster_path)
         if(movieData.results.length){
         res.render('index', {movies: movieData.results, user: req.user, posterURL});
-        console.log(movieData.results)
         }else{
             res.render('index', {movies: movieData.results, user: req.user, posterURL});
         }

@@ -14,7 +14,8 @@ module.exports = {
     show,
     add,
     watchlist,
-    delete: deleteMovie
+    delete: deleteMovie,
+    trailer
 }
 
 function show(req, res){
@@ -80,3 +81,20 @@ function deleteMovie(req, res){
     })
 }
 
+function trailer(req, res){
+    movieId = req.params.id
+    const options = {
+        url: `${rootURL}movie/${movieId}/videos?api_key=${key}` 
+    }
+    request(options, function(err, response, body){
+        const movieData = JSON.parse(body)
+        const movieArray = movieData.results
+        const movieObj = movieArray.find(function(e){
+            return e.type === "Trailer"
+        })
+        const videoKey = movieObj.key
+        console.log(videoKey)
+
+        res.render("trailer", {videoKey, user: req.user, movieId})
+        })
+}
