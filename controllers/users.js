@@ -12,7 +12,6 @@ const Url = 'discover/movie?sort_by=popularity.desc&'
 
 module.exports = {
     index,
-    show
 }
 
 
@@ -45,9 +44,6 @@ function index(req, res, next){
       
 }
 
-function show(req, res){
-    console.log("whatssssssssssssssssssssss")
-}
 
 
 //base url + /search/movie? + apikey + '&query=' + searchterm

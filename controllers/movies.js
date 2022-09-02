@@ -99,15 +99,19 @@ function trailer(req, res){
     const options = {
         url: `${rootURL}movie/${movieId}/videos?api_key=${key}` ,
     }
-    console.log(options)
     request(options, function(err, response, body){
         const movieData = JSON.parse(body)
-        console.log(body)
         const movieArray = movieData.results
         const movieObj = movieArray.find(function(e){
             return e.type === "Trailer"
         })
-        const videoKey = movieObj.key
-        res.render("trailer", {videoKey, user: req.user, movieId})
+        console.log(movieObj)
+        if(!movieObj){
+            res.redirect(`/movies/${movieId}`)
+        }else{
+            const videoKey = movieObj.key
+            res.render("trailer", {videoKey, user: req.user, movieId})
+            }
         })
+       
 }
