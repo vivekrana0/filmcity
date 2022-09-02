@@ -31,24 +31,28 @@ function show(req, res){
         const movieOverview = movieData.overview
         const homepage = movieData.homepage
         const tagline = movieData.tagline
-        
-        if(req.user){
-            User.findById(req.user.id, function(err, user){
-                let isOne = user.watchlist.some(function(e){
-                    console.log(e.id)
-                    console.log(movieId)
-                    return e.id == movieId
-                    
-                })
-                res.render("movies", {posterPath, rating, movieTitle, movieId, user: req.user, movieOverview, homepage, tagline, isOne})
-            })
-
-        }else{
-            res.redirect("/auth/google")
+        const options2 = {
+            url: `${rootURL}movie/${movieId}/reviews?api_key=${key}` 
         }
+        request(options2, function(err, response, body){
+            const reviewData = JSON.parse(body).results
+            if(req.user){
+                User.findById(req.user.id, function(err, user){
+                    let isOne = user.watchlist.some(function(e){
+                        return e.id == movieId
+                        
+                    })
+                    res.render("movies", {posterPath, rating, movieTitle, movieId, user: req.user, movieOverview, homepage, tagline, isOne, reviewData})
+                })
     
+            }else{
+                res.redirect("/auth/google")
+            }
         
-    })
+            
+        })
+        })
+       
 }
 
 function add(req, res){

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script defer type="text/javascript" src="/javascripts/script.js"></script>
     
@@ -9,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Document</title>
+  <title>Filmcity</title>
 </head>
 <body>
   <header>
@@ -24,7 +23,18 @@
     </ul>
     </nav>
   </header>
-  <h1 id="watchlist_heading">Your Watchlist</h1>
+  <% if(!movies.length){ %>
+    <h2 id="watchlist_heading">No Movies in Watchlist</h2>
+    <form action="/" method="GET">
+      <input type="text" placeholder="Search" class="search" name="title">
+      <span>
+        <button class="search" type="submit" id="btn">Go!</button>
+      </span>
+    </form>
+  <% }else{ %>
+    <h2 id="watchlist_heading">Your Watchlist</h2>
+  <%}%> 
+ 
   <main>
     <% movies.forEach(function(movie){ %>
     <% const posterImg = posterURL + movie.poster_path %> 

@@ -1,4 +1,5 @@
 *{
+  font-family: 'Source Sans Pro', Arial, sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0; 
@@ -81,7 +82,7 @@ main{
 
 .movie img{
   width: 100%;
-  height: 400px;
+  height: 37vh;
 }
 
 form{
@@ -95,7 +96,7 @@ form{
 
 .image{
   width: 100%;
-  height: 750px;
+  height: 75vh;
 }
 
 .movie-title{
@@ -169,6 +170,7 @@ a:hover {
 #watchlist_heading{
   color: white;
   margin: 2rem 4rem;
+  padding-left: 37%;
 }
 #delete{
   display: flex;
@@ -215,4 +217,18 @@ iframe{
 }
 #delete_link:hover{
   color:white;
+}
+
+.review_author{
+  color: #54b3d6;
+  margin: 2rem 1rem;
+}
+
+.review_content{
+  color: white;
+  margin: 2rem 1rem;
+}
+#review{
+  color: white;
+  margin: 2rem 1rem;
 }
