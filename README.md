@@ -1,4 +1,5 @@
-# Filmcity - A movie watchlist web application. The idea behind this app is to see which movies are tranding, read about them and if you like a perticular movie, add it to your personalized watchlist.
+# Filmcity 
+* A movie watchlist web application. The idea behind this app is to see which movies are tranding, read about them and if you like a perticular movie, add it to your personalized watchlist.
 
 # Screenshots:
 

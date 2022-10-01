@@ -46,12 +46,12 @@ function show(req, res){
                 })
     
             }else{
-                res.redirect("/auth/google")
+                res.render("movies", {posterPath, rating, movieTitle, movieId, user: req.user, movieOverview, homepage, tagline, reviewData})
             }
         
             
         })
-        })
+    })
        
 }
 
@@ -105,7 +105,6 @@ function trailer(req, res){
         const movieObj = movieArray.find(function(e){
             return e.type === "Trailer"
         })
-        console.log(movieObj)
         if(!movieObj){
             res.redirect(`/movies/${movieId}`)
         }else{

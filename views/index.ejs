@@ -44,14 +44,16 @@
       <% movies.forEach(function(movie){ %>
         <% if(!movie.poster_path) return %>
       <% const posterImg = posterURL + movie.poster_path %> 
-      <% const movieId = movie.id %> 
-      <div class="movie">
-        <img  src="<%= posterImg %>" data-movie-id="<%=movieId%> " alt="">
-        <div class="movie-title">
-          <h4><%= movie.title  %> </h4>
-          <span><%= movie.vote_average %> </span>
+      <% const movieId = movie.id %>
+      <a href="/movies/<%=movieId %>">
+        <div class="movie">
+          <img  src="<%= posterImg %>" data-movie-id="<%=movieId%> " alt="">
+          <div class="movie-title">
+            <h4><%= movie.title  %> </h4>
+            <span><%= movie.vote_average %> </span>
+          </div>
         </div>
-      </div>
+      </a> 
     <% }) %>
 
     
