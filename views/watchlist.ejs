@@ -38,20 +38,22 @@
   <main>
     <% movies.forEach(function(movie){ %>
     <% const posterImg = posterURL + movie.poster_path %> 
-    <!-- <% const movieId = movie.id %>  -->
+    <% const movieId = movie.id %> 
     
-    <div class="movie">
+      <div class="movie">
         <div id="delete">
             <a id="delete_link" href="/movies/<%=movie.id%>/watchlist/delete">Delete</a>
         </div>
-      <img  src="<%= posterImg %>" data-movie-id="<%=movieId%> " alt="">
-      <div class="movie-title">
-        <h3><%= movie.original_title  %> </h3>
-        <span><%= movie.vote_average %> </span>
-      </div>
-      
-    </div>
-  <% }) %>
+        <a href="/movies/<%=movieId %>">
+          <img  src="<%= posterImg %>" data-movie-id="<%=movieId%> " alt="">
+          <div class="movie-title">
+            <h3><%= movie.original_title  %> </h3>
+            <span><%= movie.vote_average %> </span>
+          </div>
+        </a>
+      </div> 
+    <% }) %>
+  
 
   
 </main>
